@@ -4,12 +4,11 @@ from keras.datasets import mnist
 import matplotlib.pyplot as plt
 import numpy as np
 from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, Flatten, GlobalAvgPool2D
-
-
+from deeplearning_models import functional_model, MyCustomModel
+from my_utils import display_examples
 
 # tensorflow.keras.Sequential
-
-model= tf.keras.Sequential(
+seq_model= tf.keras.Sequential(
     [
         Input(shape=(28,28,1)), #size of the image, 1 represent the color chanel
         Conv2D(32, (3,3), activation='relu'), #[0] how many filters are [1] size of the filter
@@ -28,23 +27,9 @@ model= tf.keras.Sequential(
 
     ]
 )
-model.summary()
-#functional approach : function that returns a model
+seq_model.summary()
 
-# tensorflow.keras.Model : inherit from this class and modify the object
 
-def display_examples(examples, labels):
-    plt.figure(figsize=(8,8))
-    for i in range(25):
-        idx = np.random.randint(0,examples.shape[0]-1)
-        img = examples[idx]
-        label = labels[idx]
-        plt.subplot(5,5,i+1)
-        plt.title(str(label))
-        plt.tight_layout()
-        plt.imshow(img, cmap='gray')
-
-    plt.show()
 if __name__=='__main__':
 
 
@@ -72,7 +57,8 @@ if __name__=='__main__':
     # y_train = tf.keras.utils.to_categorical(y_train, 10)
     # y_test = tf.keras.utils.to_categorical(y_test, 10)
 
-
+    # model = functional_model()
+    model = MyCustomModel()
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
 
     #hyperparameters to experiment, batch_size=amount of images that the model process at once
@@ -81,4 +67,4 @@ if __name__=='__main__':
     model.fit(x_train, y_train, batch_size=64, epochs=3, validation_split=0.2)
 
     model.evaluate(x_test,y_test, batch_size=64)
-
+    model.summary()
