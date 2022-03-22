@@ -5,6 +5,7 @@ __pycache__/
 **/Meta
 **/Test
 **/Train
+**/_training
 
 
 # C extensions
