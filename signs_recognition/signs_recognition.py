@@ -21,13 +21,15 @@ if __name__=='__main__':
     path_train = 'C:\\Users\\sergi\\Documents\\PROGRAMAS APRENDIZAJE\\tensorflow\\signs_recognition\\_training\\train'
     path_val = 'C:\\Users\\sergi\\Documents\\PROGRAMAS APRENDIZAJE\\tensorflow\\signs_recognition\\_training\\val'
     path_test = 'C:\\Users\\sergi\\Documents\\PROGRAMAS APRENDIZAJE\\tensorflow\\signs_recognition\\Test'
-    batch_size = 64
-    epochs = 15
+    batch_size = 32
+    epochs = 6
+    lr = 0.0001 #learning rate for the keras.optimizers.Adam parameters
+
 
     train_generator, val_generator, test_generator = create_generators(batch_size, path_train, path_val, path_test)
     nbr_classes = train_generator.num_classes
-    TRAIN = False
-    TEST = True
+    TRAIN = True
+    TEST = False
     if TRAIN:
         path_to_save_model = './models'
         check_saver = ModelCheckpoint(
