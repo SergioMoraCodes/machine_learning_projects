@@ -27,7 +27,7 @@ seq_model= tf.keras.Sequential(
 
     ]
 )
-seq_model.summary()
+
 
 
 if __name__=='__main__':
@@ -41,30 +41,33 @@ if __name__=='__main__':
     # print('x_test.shape = ', x_test.shape)
     # print('y_test.shape = ', y_test.shape)
 
-    # display_examples(x_train,y_train)
 
-    #normalazing the data, the gradient moves faster towards the global minimum of the cost function
-    #it'a good practice but it's not necessary for every dataset
-    x_train = x_train.astype('float32') / 255
-    x_test = x_test.astype('float32') / 255
+    seq_model.summary()
 
-    #transforming the dimension of the array, because input() takes one more dimension
+    if False:
 
-    x_train = np.expand_dims(x_train, axis=-1)
-    x_test = np.expand_dims(x_test, axis=-1)
+        #normalazing the data, the gradient moves faster towards the global minimum of the cost function
+        #it'a good practice but it's not necessary for every dataset
+        x_train = x_train.astype('float32') / 255
+        x_test = x_test.astype('float32') / 255
 
-    # to convert labels from normal encoding to one hot encoding, and use categorical_crossentropy
-    # y_train = tf.keras.utils.to_categorical(y_train, 10)
-    # y_test = tf.keras.utils.to_categorical(y_test, 10)
+        #transforming the dimension of the array, because input() takes one more dimension
 
-    # model = functional_model()
-    model = MyCustomModel()
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
+        x_train = np.expand_dims(x_train, axis=-1)
+        x_test = np.expand_dims(x_test, axis=-1)
 
-    #hyperparameters to experiment, batch_size=amount of images that the model process at once
-                                   #epochs=amount of times that the model goes trough all the data
-                                   #validation_data=percentage of the total data to validate the model
-    model.fit(x_train, y_train, batch_size=64, epochs=3, validation_split=0.2)
+        # to convert labels from normal encoding to one hot encoding, and use categorical_crossentropy
+        # y_train = tf.keras.utils.to_categorical(y_train, 10)
+        # y_test = tf.keras.utils.to_categorical(y_test, 10)
 
-    model.evaluate(x_test,y_test, batch_size=64)
-    model.summary()
+        # model = functional_model()
+        model = MyCustomModel()
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
+
+        #hyperparameters to experiment, batch_size=amount of images that the model process at once
+                                    #epochs=amount of times that the model goes trough all the data
+                                    #validation_data=percentage of the total data to validate the model
+        model.fit(x_train, y_train, batch_size=64, epochs=3, validation_split=0.2)
+
+        model.evaluate(x_test,y_test, batch_size=64)
+        model.summary()
