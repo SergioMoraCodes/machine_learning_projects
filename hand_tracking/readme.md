@@ -1,40 +1,26 @@
-# Computer vision with python 
+# Computer vision with python
 ## Using mediapipe and cv2 libraries
 
-it's important to create the basic instances to display the rest.
+### Process
+1. importing libraries
+2. activating the camera and displaying an image
+3. creating mediapipe.Hands object to detect and track hands in the image
+4. Extracting the information of the hands object
 
-![](pine.png)
 
-using a lot of images to explain what is going on, 
+#### 1. importing libraries
 
-### creating tables
--tener en cuenta
--contenido
--para quien está escrito
--cual es el propósito
+![](libraries.png)
 
-|shortcut | what it does|
-|-|-|
-|Ctrl+T|Show all symbols|
-|Ctrl+Shift+Space|Trigger Parameters Hints|
+#### 2. Activating the camera with CV2
+![](cv2_basic.png)
 
-```mermaid
-flowchart TD;
-    A[Input] --- |processing| B((Round));
-    B ===> C{Decision};
-    C -->|One| D[Result 1];
-    C -.->|Three| E[Result 3];
-    C -->|Two| f[Result 2];
-    E -.-> |reorder|f[Result 2];
-    D -->|finalprocess| g[Result 4];
-    f -->|finalprocess| g[Result 4];
-    g ===> |Feedback Loop| C
-```
+when doing cv2.videocapture(0), you can choose a video camera changing the number
 
-```mermaid
-flowchart TD;
-    A((Input)) & B((Input)) -->
-    C((1)) & D((2)) & E((3)) & F((4));
-    C & D & E & F --> 
-    G((1)) & H((2)) & I((3)) & J((4));
-```
+#### 3. mediapipe.Hands object
+
+![](mediahands.png)
+
+#### 4. Extracting the information from mpHands
+
+When we 
