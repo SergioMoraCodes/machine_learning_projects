@@ -1,4 +1,4 @@
-# Computer vision with python
+# Hand tracking module
 ## Using mediapipe and cv2 libraries
 
 ### Process
