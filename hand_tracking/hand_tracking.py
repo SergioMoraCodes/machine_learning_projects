@@ -5,7 +5,7 @@ import time
 # camera
 cap = cv2.VideoCapture(0) #? open a video file or camera
 
-# hands
+#* hands
 mpHands = mp.solutions.hands # abbreviation for easy use
 hands = mpHands.Hands() # create hands object
                         #! parameters for modifications
@@ -24,7 +24,7 @@ cTime = 0 # Current time
 # checking if camera has opened
 assert cap.isOpened(), "file/camera could not be opened!"
 while True:
-    # capturing image
+    # capturing imagesan
     success, img = cap.read()    #? returns a boolean and image content, gives a frame in BGR
     if not success: break        # if the camera status is false or null
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # converts BGR to RGB
@@ -42,10 +42,10 @@ while True:
                 cx, cy = int(lm.x*width), int(lm.y*height)
                 print(id, cx, cy)
 
-                # using the information
-                if id == 8:
-                    # drawing a circle(image, position, radius, color, thickness)
-                    cv2.circle(img,(cx,cy),8,(255,0,255),cv2.FILLED)
+                # # using the information
+                # if id == 8:
+                #     # drawing a circle(image, position, radius, color, thickness)
+                #     cv2.circle(img,(cx,cy),8,(255,0,255),cv2.FILLED)
 
             #? drawing the hands in the image
             #? draw_landmarks(image(where to draw), landmarks(hands), hand_connections(optional))
@@ -62,4 +62,4 @@ while True:
     cv2.putText(img, str(int(fps)), (15,50),cv2.FONT_HERSHEY_PLAIN,2,(255,0,255),2)
     cv2.imshow("image", img)             # standard procedure to run a webcam
     if cv2.waitKey(1) & 0xFF == ord('q'):# standard procedure to run a webcam
-      break
+        break
