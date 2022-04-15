@@ -8,7 +8,7 @@ __pycache__/
 **/Data
 **/_training
 *.png
-
+*.mp4
 
 # C extensions
 *.so
