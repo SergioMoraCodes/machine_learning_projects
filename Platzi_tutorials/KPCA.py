@@ -2,7 +2,7 @@ import pandas as pd
 import sklearn as sk
 import matplotlib.pyplot as plt
 
-from sklearn.decomposition import PCA, IncrementalPCA
+from sklearn.decomposition import KernelPCA # !!
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler # normalizar los datos
 from sklearn.model_selection import train_test_split
@@ -22,28 +22,13 @@ if __name__ == '__main__':
     # separate the data between Train, Test and validation
     X_train, X_test, y_train, y_test = train_test_split(df_features, df_target, test_size=0.3, random_state=42)
 
-    print(X_train.shape)
-    print(y_train.shape)
+    kpca = KernelPCA(n_components=4, kernel='poly') # linear, poly, rbf(gaussian)
+    kpca.fit(X_train)
 
-    # n_components = min(n_observations, n_features)
-    pca = PCA(n_components = 10 )
-    pca.fit(X_train)
+    df_train = kpca.transform(X_train)
+    df_test  = kpca.transform(X_test)
 
-    ipca = IncrementalPCA(n_components = 3, batch_size = 10)
-    ipca.fit(X_train)
+    logistic = LogisticRegression(solver="lbfgs")
 
-    # range between zero and the n_components, and importance ratio of each component 
-    plt.plot(range(len(pca.explained_variance_)), pca.explained_variance_ratio_)
-    plt.show()
-
-    logistic = LogisticRegression(solver='lbfgs')
-
-    df_train = pca.transform(X_train)
-    df_test  = pca.transform(X_test)
     logistic.fit(df_train, y_train)
-    print('Score: ', logistic.score(df_test, y_test))
-
-    df_train = ipca.transform(X_train)
-    df_test  = ipca.transform(X_test)
-    logistic.fit(df_train, y_train)
-    print('Score: ', logistic.score(df_test, y_test))
+    print("score = ", logistic.score(df_test, y_test))
